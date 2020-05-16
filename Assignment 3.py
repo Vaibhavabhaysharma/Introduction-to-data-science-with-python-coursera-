@@ -237,14 +237,15 @@ answer_eight()
 # In[48]:
 
 def answer_nine():
-    Top15 = answer_one()
-    Top15['PopEstimate'] = Top15['Energy Supply'] / Top15['Energy Supply per Capita']
-    Top15['Citable docs per Capita'] = Top15['Citable documents'] / Top15['PopEstimate']
-    correlation = Top15['Citable docs per Capita'].corr(Top15['Energy Supply per Capita'])
-    return correlation
+    import numpy as np
+    df = answer_one()
+    df['population']=df['Energy Supply']/df['Energy Supply per Capita']
+    df['citable documents per person']=df['Citable documents']/df['population']
+    df['citable documents per person']=np.float64(df['citable documents per person'])
+    relation = df['citable documents per person'].corr(df['Energy Supply per Capita'])
+    return(relation)
 
 answer_nine()
-
 
 # In[49]:
 
